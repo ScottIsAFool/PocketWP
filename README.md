@@ -3,6 +3,13 @@ PocketWP
 
 A helper class for apps wanting to create a Pocket client, or wanting to send stuff to a pocket client on Windows Phone. For apps wanting to send items to Pocket, this provides methods to ease launching any Pocket clients that the user has installed. For Pocket client developers, this allows you to easily tap into the shared URI scheme used by other apps. 
 
+## Installation ##
+This is available through nuget 
+
+```
+Install-Package PocketWP
+```
+
 ## Sending to Pocket Clients ##
 Sending to a Pocket client in its simplest form is as easy as doing:
 
