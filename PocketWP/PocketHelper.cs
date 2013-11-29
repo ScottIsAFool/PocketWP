@@ -88,7 +88,7 @@ namespace PocketWP
         public static bool HasPocketItem(Uri uri)
         {
             // /Protocol?encodedLaunchUri=squirrel%3AAddNut%3Fnut%3D
-            return uri.ToString().Contains(HttpUtility.UrlEncode(PocketUrl));
+            return uri.ToString().Contains(Uri.EscapeDataString(PocketUrl));
         }
 
         /// <summary>
