@@ -1,8 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using PropertyChanged;
 
 namespace PocketWP
 {
     [DataContract]
+    [ImplementPropertyChanged]
     public class PocketDataItem
     {
         /// <summary>
