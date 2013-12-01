@@ -88,9 +88,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AddType.cs" />
+    <Compile Include="PocketDataItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PocketHelper.cs" />
-    <Compile Include="ExternalPocketItem.cs" />
+    <Compile Include="PocketData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />

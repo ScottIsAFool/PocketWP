@@ -35,12 +35,15 @@ namespace PocketWP
         /// <param name="callbackUri">The callback URI for your app if you want to be called back after adding.</param>
         public static void AddItemToPocket(string uri, string tags = null, string title = null, string tweetId = null, string callbackUri = null)
         {
-            AddToPocket(new ExternalPocketItem
+            AddToPocket(new PocketData
             {
-                Uri = uri,
-                Tags = tags,
-                Title = title,
-                TweetId = tweetId,
+                Item = new PocketDataItem
+                {
+                    Uri = uri,
+                    Tags = tags,
+                    Title = title,
+                    TweetId = tweetId
+                },
                 CallbackUri = callbackUri,
                 Type = AddType.Single
             });
@@ -49,15 +52,13 @@ namespace PocketWP
         /// <summary>
         /// Adds multiple items to Pocket
         /// </summary>
-        /// <param name="urls">The URIs.</param>
-        /// <param name="tags">The tags.</param>
+        /// <param name="items">The items.</param>
         /// <param name="callbackUri">The callback URI for your app if you want to be called back after adding.</param>
-        public static void AddItemsToPocket(List<string> urls, string tags = null, string callbackUri = null)
+        public static void AddItemsToPocket(List<PocketDataItem> items, string callbackUri = null)
         {
-            AddToPocket(new ExternalPocketItem
+            AddToPocket(new PocketData
             {
-                Urls = urls,
-                Tags = tags,
+                Items = items,
                 CallbackUri = callbackUri,
                 Type = AddType.Multiple
             });
@@ -66,16 +67,16 @@ namespace PocketWP
         /// <summary>
         /// Buries my nut.
         /// </summary>
-        /// <param name="item">The item.</param>
+        /// <param name="data">The item.</param>
         /// <exception cref="System.ArgumentNullException">item;Your nut can't be null</exception>
-        private static async void AddToPocket(ExternalPocketItem item)
+        private static async void AddToPocket(PocketData data)
         {
-            if (item == null)
+            if (data == null)
             {
-                throw new ArgumentNullException("item", "Your item can't be null");
+                throw new ArgumentNullException("data", "Your item can't be null");
             }
 
-            var url = PocketUrl + item.ToEscapedJson();
+            var url = PocketUrl + data.ToEscapedJson();
 
             await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
         }
@@ -87,7 +88,6 @@ namespace PocketWP
         /// <returns>True if nut is present</returns>
         public static bool HasPocketItem(Uri uri)
         {
-            // /Protocol?encodedLaunchUri=squirrel%3AAddNut%3Fnut%3D
             return uri.ToString().Contains(Uri.EscapeDataString(PocketUrl));
         }
 
@@ -96,7 +96,7 @@ namespace PocketWP
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>The deserialised nut</returns>
-        public static ExternalPocketItem RetrievePocketItem(Uri uri)
+        public static PocketData RetrievePocketItem(Uri uri)
         {
             var pocketUri = uri.ToString().Replace("/Protocol?encodedLaunchUri=", string.Empty);
             pocketUri = Uri.UnescapeDataString(pocketUri).Replace(PocketUrl, string.Empty);
@@ -105,10 +105,10 @@ namespace PocketWP
 
             try
             {
-                var serializer = new DataContractJsonSerializer(typeof(ExternalPocketItem));
+                var serializer = new DataContractJsonSerializer(typeof(PocketData));
                 using (var reader = new MemoryStream(Encoding.UTF8.GetBytes(itemJson)))
                 {
-                    return (ExternalPocketItem)serializer.ReadObject(reader);
+                    return (PocketData)serializer.ReadObject(reader);
                 }
             }
             catch
