@@ -24,6 +24,13 @@ The helper also allows your app to send a callback URI to the Pocket client too,
 ## Use in Pocket Clients ##
 This helper will allow you to easily check a url that is passed to your app and detect if it's a Pocket request, and if it is, it will give you an object that you can then use in your own app.
 
+Because this all takes advantage of custom URI schemes, you need to make sure you've registered the common scheme in your app's manifest file.
+
+After the <Token> tag, and if you haven't already got the Extensions tag, add that, then include the following:
+```xml
+<Protocol Name="pocket" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
+```
+
 In your UriMapper, you will have code similar to this:
 
 ```c#
