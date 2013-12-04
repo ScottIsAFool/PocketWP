@@ -87,7 +87,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AddType.cs" />
     <Compile Include="PocketDataItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PocketHelper.cs" />

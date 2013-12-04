@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
@@ -37,15 +36,17 @@ namespace PocketWP
         {
             AddToPocket(new PocketData
             {
-                Item = new PocketDataItem
+                Items = new List<PocketDataItem>()
                 {
-                    Uri = uri,
-                    Tags = tags,
-                    Title = title,
-                    TweetId = tweetId
+                    new PocketDataItem
+                    {
+                        Uri = uri,
+                        Tags = tags,
+                        Title = title,
+                        TweetId = tweetId
+                    }
                 },
-                CallbackUri = callbackUri,
-                Type = AddType.Single
+                CallbackUri = callbackUri
             });
         }
 
@@ -59,19 +60,18 @@ namespace PocketWP
             AddToPocket(new PocketData
             {
                 Items = items,
-                CallbackUri = callbackUri,
-                Type = AddType.Multiple
+                CallbackUri = callbackUri
             });
         }
 
         /// <summary>
-        /// Buries my nut.
+        /// Launch Pocket application URI with appended pocket data.
         /// </summary>
-        /// <param name="data">The item.</param>
+        /// <param name="data">The pocket data.</param>
         /// <exception cref="System.ArgumentNullException">item;Your nut can't be null</exception>
         private static async void AddToPocket(PocketData data)
         {
-            if (data == null)
+            if (data == null || data.Items == null)
             {
                 throw new ArgumentNullException("data", "Your item can't be null");
             }
@@ -82,21 +82,21 @@ namespace PocketWP
         }
 
         /// <summary>
-        /// Determines whether the specified URI has nuts.
+        /// Determines whether the specified URI contains pocket data.
         /// </summary>
         /// <param name="uri">The URI.</param>
-        /// <returns>True if nut is present</returns>
-        public static bool HasPocketItem(Uri uri)
+        /// <returns>True if pocket data is present</returns>
+        public static bool HasPocketData(Uri uri)
         {
             return uri.ToString().Contains(Uri.EscapeDataString(PocketUrl));
         }
 
         /// <summary>
-        /// Retrieves the nut.
+        /// Retrieves the pocket data.
         /// </summary>
         /// <param name="uri">The URI.</param>
-        /// <returns>The deserialised nut</returns>
-        public static PocketData RetrievePocketItem(Uri uri)
+        /// <returns>The deserialised pocket data</returns>
+        public static PocketData RetrievePocketData(Uri uri)
         {
             var pocketUri = uri.ToString().Replace("/Protocol?encodedLaunchUri=", string.Empty);
             pocketUri = Uri.UnescapeDataString(pocketUri).Replace(PocketUrl, string.Empty);

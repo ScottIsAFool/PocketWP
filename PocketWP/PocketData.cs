@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using PropertyChanged;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using PropertyChanged;
 
 namespace PocketWP
 {
@@ -11,15 +11,6 @@ namespace PocketWP
     [DataContract]
     public class PocketData
     {
-        /// <summary>
-        /// Gets or sets the item.
-        /// </summary>
-        /// <value>
-        /// The item.
-        /// </value>
-        [DataMember]
-        public PocketDataItem Item { get; set; }
-
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
@@ -37,15 +28,6 @@ namespace PocketWP
         /// </value>
         [DataMember]
         public string CallbackUri { get; set; }
-
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        /// <value>
-        /// Single/Multiple items.
-        /// </value>
-        [DataMember]
-        public AddType Type { get; internal set; }
 
         /// <summary>
         /// Converts POCO to JSON.
