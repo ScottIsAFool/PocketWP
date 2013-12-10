@@ -105,8 +105,8 @@ namespace PocketWP
 
             if (queryString.ContainsKey("source"))
             {
-                var urlToAdd = queryString["Url"];
-                var title = queryString["title"];
+                var urlToAdd = queryString["Url"] ?? string.Empty;
+                var title = queryString["Title"] ?? string.Empty;
 
                 var item = new PocketData
                 {
