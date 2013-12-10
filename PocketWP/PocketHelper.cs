@@ -114,8 +114,8 @@ namespace PocketWP
                     {
                         new PocketDataItem
                         {
-                            Uri = urlToAdd,
-                            Title = title
+                            Uri = Uri.UnescapeDataString(urlToAdd),
+                            Title = Uri.UnescapeDataString(title)
                         }
                     }
                 };
