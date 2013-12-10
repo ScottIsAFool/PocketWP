@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using PocketWP.Extensions;
 
 namespace PocketWP
 {
@@ -99,9 +100,30 @@ namespace PocketWP
         public static PocketData RetrievePocketData(Uri uri)
         {
             var pocketUri = uri.ToString().Replace("/Protocol?encodedLaunchUri=", string.Empty);
-            pocketUri = Uri.UnescapeDataString(pocketUri).Replace(PocketUrl, string.Empty);
+            pocketUri = Uri.UnescapeDataString(pocketUri);
+            var queryString = new Uri(pocketUri, UriKind.Absolute).QueryString();
 
-            var itemJson = Uri.UnescapeDataString(pocketUri);
+            if (queryString.ContainsKey("source"))
+            {
+                var urlToAdd = queryString["Url"];
+                var title = queryString["title"];
+
+                var item = new PocketData
+                {
+                    Items = new List<PocketDataItem>
+                    {
+                        new PocketDataItem
+                        {
+                            Uri = urlToAdd,
+                            Title = title
+                        }
+                    }
+                };
+
+                return item;
+            }
+            
+            var itemJson = Uri.UnescapeDataString(queryString["Add"]);
 
             try
             {
