@@ -5,14 +5,14 @@ using System.Net;
 
 namespace PocketWP.Extensions
 {
-    public static class UriExtensions
+    internal static class UriExtensions
     {
         /// <summary>
         /// Gets a collection of query string values.
         /// </summary>
         /// <param name="uri">The current uri.</param>
         /// <returns>A collection that contains the query string values.</returns>
-        public static IDictionary<string, string> QueryString(this Uri uri)
+        internal static IDictionary<string, string> QueryString(this Uri uri)
         {
             var uriString = uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString;
 
