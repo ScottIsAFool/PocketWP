@@ -10,7 +10,7 @@ namespace PocketWP
     public static class PocketHelper
     {
         private const string PocketScheme = "pocket:";
-        private const string PocketUrl = PocketScheme + "Add?item=";
+        private const string PocketUrl = PocketScheme + "Add?";
 
         /// <summary>
         /// Adds a single item to Pocket
@@ -89,7 +89,8 @@ namespace PocketWP
         /// <returns>True if pocket data is present</returns>
         public static bool HasPocketData(Uri uri)
         {
-            return uri.ToString().Contains(Uri.EscapeDataString(PocketUrl));
+            var escapedProtocol = Uri.EscapeDataString(PocketUrl);
+            return uri.ToString().Contains(escapedProtocol);
         }
 
         /// <summary>
@@ -105,18 +106,20 @@ namespace PocketWP
 
             if (queryString.ContainsKey("source"))
             {
-                var urlToAdd = queryString["Url"] ?? string.Empty;
-                var title = queryString["Title"] ?? string.Empty;
+                var urlToAdd = queryString.ContainsKey("Url") ? queryString["Url"] : string.Empty;
+                var title = queryString.ContainsKey("Title") ? queryString["Title"] : string.Empty;
+
+                var pocketItem = new PocketDataItem
+                {
+                    Uri = Uri.UnescapeDataString(urlToAdd),
+                    Title = Uri.UnescapeDataString(title)
+                };
 
                 var item = new PocketData
                 {
                     Items = new List<PocketDataItem>
                     {
-                        new PocketDataItem
-                        {
-                            Uri = Uri.UnescapeDataString(urlToAdd),
-                            Title = Uri.UnescapeDataString(title)
-                        }
+                        pocketItem
                     }
                 };
 
