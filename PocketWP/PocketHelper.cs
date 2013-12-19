@@ -77,7 +77,7 @@ namespace PocketWP
                 throw new ArgumentNullException("data", "Your item can't be null");
             }
 
-            var url = PocketUrl + data.ToEscapedJson();
+            var url = string.Format("{0}Data={1}", PocketUrl, data.ToEscapedJson());
 
             await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
         }
@@ -126,7 +126,7 @@ namespace PocketWP
                 return item;
             }
             
-            var itemJson = Uri.UnescapeDataString(queryString["Add"]);
+            var itemJson = Uri.UnescapeDataString(queryString["Data"]);
 
             try
             {
