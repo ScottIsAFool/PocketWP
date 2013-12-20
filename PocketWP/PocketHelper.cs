@@ -125,6 +125,11 @@ namespace PocketWP
 
                 return item;
             }
+
+            if(!queryString.ContainsKey("Data"))
+            {
+                return null;
+            }
             
             var itemJson = Uri.UnescapeDataString(queryString["Data"]);
 
