@@ -43,3 +43,11 @@ if (PocketHelper.HasPocketData(uri))
     ...
 }
 ```
+
+## Used in the following Pocket clients
+
+[![Squirrel](http://cdn.marketplaceimages.windowsphone.com/v8/images/32f117a4-6b57-4a92-ab42-71aa0fa8503f?imageType=ws_icon_tiny)](http://www.windowsphone.com/en-us/store/app/squirrel/67821d47-e348-45d5-90d7-0930bea50bee) | [![Pouch](http://cdn.marketplaceimages.windowsphone.com/v8/images/84b7b6d4-3827-4cd8-aead-12e3896b64a0?imageType=ws_icon_tiny)](http://www.windowsphone.com/en-us/store/app/pouch/b648e223-119c-4632-a03c-de4f26d4b0cb) | [![Poki](http://cdn.marketplaceimages.windowsphone.com/v8/images/7f549ebf-f83b-48b1-a781-839efe3aa640?imageType=ws_icon_tiny)](http://www.windowsphone.com/en-us/store/app/poki/2532ff45-aa3f-4aba-a266-ed7ec71d47bd) | [![OwlReader](http://cdn.marketplaceimages.windowsphone.com/v8/images/92d70b06-5386-4ffd-99bd-b47aea17aefe?imageType=ws_icon_tiny)](http://www.windowsphone.com/en-us/store/app/owl-reader/3042945a-f1ce-4a0f-99db-800cd8b9169d) |
+|---|---|---|---|
+| [Squirrel](http://www.windowsphone.com/en-us/store/app/squirrel/67821d47-e348-45d5-90d7-0930bea50bee) | [Pouch](http://www.windowsphone.com/en-us/store/app/pouch/b648e223-119c-4632-a03c-de4f26d4b0cb) | [Poki](http://www.windowsphone.com/en-us/store/app/poki/2532ff45-aa3f-4aba-a266-ed7ec71d47bd) | [OwlReader](http://www.windowsphone.com/en-us/store/app/owl-reader/3042945a-f1ce-4a0f-99db-800cd8b9169d)
+
+_and many others (we can't track anything ...)_
